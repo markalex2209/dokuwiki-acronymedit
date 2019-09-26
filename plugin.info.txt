@@ -1,0 +1,7 @@
+base   acronymedit
+author Alexey Markouski
+email  alexey.markouski@gmail.com
+date   2019-09-24
+name   Abbreviations editor
+desc   Provide abbreviation editor on administration page
+url    https://www.dokuwiki.org/plugin:acronymedit
