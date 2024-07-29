@@ -1,15 +1,12 @@
 <?php
-if(!defined('DOKU_INC')) die();
-if(!defined('DOKU_PLUGIN')) die();
-if(!defined('ABBR_CONF')) define('ABBR_CONF',DOKU_INC.'/conf/acronyms.local.conf');
-
-require_once(DOKU_PLUGIN.'admin.php');
 
 /**
  * All DokuWiki plugins to extend the admin function
  * need to inherit from this class
  */
 class admin_plugin_acronymedit extends DokuWiki_Admin_Plugin {
+
+    const ABBR_CONF = DOKU_INC.'/conf/acronyms.local.conf';
 
     /**
      * return sort order for position in admin menu
@@ -37,7 +34,7 @@ class admin_plugin_acronymedit extends DokuWiki_Admin_Plugin {
 
       if (isset($_POST['saver']) && $_POST['saver']==1) {
         $ok=true;
-        $ok = $ok & $this->writeFile(ABBR_CONF, $_POST['abbr']);
+        $ok = $ok & $this->writeFile(self::ABBR_CONF, $_POST['abbr']);
 
         if ($ok) {
           print "<form name=\"message_form\" method=\"POST\"><input type=\"hidden\" name=\"saver\" value=\"0\" /></form>";
@@ -54,7 +51,7 @@ class admin_plugin_acronymedit extends DokuWiki_Admin_Plugin {
 
       print "<h3>".$this->getLang('abbr_list')."</h3>";
       print "<textarea name=\"abbr\" style=\"width:100%; height:20em;\">";
-      print @file_get_contents(ABBR_CONF);
+      print @file_get_contents(self::ABBR_CONF);
       print "</textarea>";
       print "<br /><br />";
 
