@@ -12,15 +12,6 @@ require_once(DOKU_PLUGIN.'admin.php');
 class admin_plugin_acronymedit extends DokuWiki_Admin_Plugin {
 
     /**
-     * return prompt for admin menu
-     */
-    function getMenuText($language) {
-      if (!$this->disabled)
-        return parent::getMenuText($language);
-      return '';
-    }
-
-    /**
      * return sort order for position in admin menu
      */
     function getMenuSort() {
