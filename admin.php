@@ -4,7 +4,7 @@ if(!defined('DOKU_PLUGIN')) die();
 if(!defined('ABBR_CONF')) define('ABBR_CONF',DOKU_INC.'/conf/acronyms.local.conf');
 
 require_once(DOKU_PLUGIN.'admin.php');
- 
+
 /**
  * All DokuWiki plugins to extend the admin function
  * need to inherit from this class
@@ -19,24 +19,6 @@ class admin_plugin_acronymedit extends DokuWiki_Admin_Plugin {
     }
 
     /**
-     * return some info
-     */
-    function getInfo() {
-        $parts = explode('_',get_class($this));
-        $file  = DOKU_PLUGIN.'/'.$parts[2].'/plugin.info.txt';
-        $info  = array();
-        if(!@file_exists($file)) {
-            trigger_error('getInfo() not implemented in '.get_class($this).' and '.$info.' not found', E_USER_WARNING);
-        }
-        else {
-            $info= confToHash($file);
-            $lang= explode(',', $info['lang']);
-            if (in_array('desc', $lang) && ''!==$this->getLang('plugininfo_desc')) $info['desc']= $this->getLang('plugininfo_desc');
-        }
-        return $info;
-    }
- 
-    /**
      * return prompt for admin menu
      */
     function getMenuText($language) {
@@ -44,27 +26,27 @@ class admin_plugin_acronymedit extends DokuWiki_Admin_Plugin {
         return parent::getMenuText($language);
       return '';
     }
-                                                    
+
     /**
      * return sort order for position in admin menu
      */
     function getMenuSort() {
         return 4129;
     }
- 
+
     /**
      * handle user request
      */
     function handle() {
     }
- 
+
     /**
      * output appropriate html
      */
     function html() {
       global $lang;
       global $conf;
-                                    
+
       print "<h1>".$this->getLang('abbr_title')."</h1>";
       print $this->getLang('abbr_text');
       print "<br /><br />";
@@ -72,7 +54,7 @@ class admin_plugin_acronymedit extends DokuWiki_Admin_Plugin {
       if (isset($_POST['saver']) && $_POST['saver']==1) {
         $ok=true;
         $ok = $ok & $this->writeFile(ABBR_CONF, $_POST['abbr']);
-        
+
         if ($ok) {
           print "<form name=\"message_form\" method=\"POST\"><input type=\"hidden\" name=\"saver\" value=\"0\" /></form>";
           print "<script>document.forms['message_form'].submit();</script>";
@@ -118,5 +100,5 @@ class admin_plugin_acronymedit extends DokuWiki_Admin_Plugin {
       return false;
     }
   }
-}                                                                                                                                                                  
+}
 // vim:ts=4:sw=4:et:enc=utf-8:
