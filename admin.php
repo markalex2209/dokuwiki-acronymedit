@@ -12,13 +12,6 @@ require_once(DOKU_PLUGIN.'admin.php');
 class admin_plugin_acronymedit extends DokuWiki_Admin_Plugin {
 
     /**
-     * Constructor
-     */
-    function admin_plugin_acronymedit() {
-        $this->setupLocale();
-    }
-
-    /**
      * return prompt for admin menu
      */
     function getMenuText($language) {
